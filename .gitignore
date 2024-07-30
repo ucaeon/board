@@ -37,5 +37,5 @@ out/
 .vscode/
 gradlew
 gradlew.bat
-setting.gradle
+settings.gradle
 application.yml
