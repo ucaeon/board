@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 수정</title>
+    <link rel="stylesheet" href="/css/post_edit.css"> <!-- CSS 파일 링크 -->
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const formObject = {};
+
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+
+            const postId = form.getAttribute('data-post-id');
+            if (!postId) {
+                alert('게시글 ID를 찾을 수 없습니다.');
+                return;
+            }
+
+            fetch(`/post/${postId}/edit`, { // POST 요청을 보내는 URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(formObject) // JSON 형식으로 전송
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // JSON 응답 처리
+                })
+                .then(data => {
+                    alert('게시글 수정 완료');
+                    window.location.href = '/'; // 수정 완료 후 게시글 목록 페이지로 리디렉션
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('게시글 수정에 실패하였습니다.');
+                });
+        }
+    </script>
+</head>
+<body>
+<header>
+    <h1>게시글 수정</h1>
+    <nav>
+        <a href="/">홈</a>
+    </nav>
+</header>
+<main>
+    <section class="post-create">
+        <h2>게시글 수정</h2>
+        <!-- Thymeleaf 표현식을 사용하여 데이터 속성에 게시글 ID를 직접 삽입 -->
+        <form onsubmit="handleFormSubmit(event)" th:attr="data-post-id=${post.id}">
+            <label for="title">제목:</label>
+            <!-- th:value를 사용하여 서버에서 받아온 제목을 폼 필드에 채웁니다. -->
+            <input type="text" id="title" name="title" th:value="${post.title}" required><br>
+            <label for="content">내용:</label>
+            <!-- th:text를 사용하여 서버에서 받아온 내용을 폼 필드에 채웁니다. -->
+            <textarea id="content" name="content" rows="4" required th:text="${post.content}"></textarea><br>
+            <input type="submit" value="수정 완료">
+        </form>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Your Company. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,120 @@
+/* 기본 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #ffeef0; /* 연한 핑크색 배경 */
+    padding: 20px;
+}
+
+/* 헤더 스타일 */
+header {
+    background: #fcb5d3; /* 연한 핑크색 */
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* 내용 영역 */
+.content {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 테이블 스타일 */
+table.tb_col {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table.tb_col th, table.tb_col td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+table.tb_col thead {
+    background: #ff99cc; /* 연한 핑크색 */
+    color: #fff;
+}
+
+table.tb_col thead th {
+    font-weight: bold;
+}
+
+table.tb_col tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* 버튼 스타일 */
+.btns {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn_st3 {
+    background: #ff99cc; /* 연한 핑크색 */
+}
+
+.btn_st3:hover {
+    background: #ffa0a0; /* 좀 더 진한 핑크색 */
+}
+
+.btn_edit {
+    color: #fff;
+    background: #ffb2d5; /* 핑크색 */
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn_edit:hover {
+    background: #ee68ac; /* 좀 더 진한 핑크색 */
+}
+
+.btn_delete {
+    color: #fff;
+    background: #ffa0a0; /* 빨간색 */
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn_delete:hover {
+    background: #e60000; /* 좀 더 진한 빨간색 */
+}
+
+/* 버튼 정렬 */
+.btn_set {
+    text-align: right;
+}
+
+/* 메시지 */
+.no_data_msg {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+}

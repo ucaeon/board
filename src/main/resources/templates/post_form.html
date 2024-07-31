@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성</title>
+    <link rel="stylesheet" href="/css/post_form.css"> <!-- CSS 파일 링크 -->
+
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = {};
+
+            // FormData를 일반 객체로 변환
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            fetch('/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(data) // JSON 형식으로 전송
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert('게시글 작성 완료');
+                    window.location.href = '/'; // 작성 완료 후 게시글 목록 페이지로 리디렉션
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</head>
+<body>
+<header>
+    <h1>게시글 작성</h1>
+    <nav>
+        <a href="/">홈</a>
+    </nav>
+</header>
+<main>
+    <section class="post-create">
+        <h2>새 게시글 작성</h2>
+        <form onsubmit="handleFormSubmit(event)">
+            <label for="title">제목:</label>
+            <input type="text" id="title" name="title" required><br>
+            <label for="content">내용:</label>
+            <textarea id="content" name="content" rows="4" required></textarea><br>
+            <input type="submit" value="작성 완료">
+        </form>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Your Company. All rights reserved.</p>
+</footer>
+</body>
+</html>

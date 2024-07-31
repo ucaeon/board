@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세보기</title>
+    <link rel="stylesheet" href="/css/post.css">
+</head>
+<body>
+<header>
+    <h1>게시글 상세보기</h1>
+</header>
+<main>
+    <section class="post-details">
+        <h2 class="post-title" th:text="${post.title}">제목</h2>
+        <div class="post-content" th:text="${post.content}">내용</div>
+        <div class="post-info">
+            <p><strong>작성일:</strong> <span th:text="${post.createdAt}">날짜</span></p>
+            <p><strong>수정일:</strong> <span th:text="${post.updateAt}">날짜</span></p>
+            <p><strong>삭제일:</strong> <span th:text="${post.deleteAt}">날짜</span></p>
+        </div>
+        <div class="post-actions">
+            <a th:href="@{/post/{postId}/edit(postId=${postId})}" class="btn">수정</a>
+        </div>
+        <div class="back-to-list">
+            <a href="/" class="btn">목록으로</a>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Your Company. All rights reserved.</p>
+</footer>
+</body>
+</html>

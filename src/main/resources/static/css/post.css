@@ -1,0 +1,64 @@
+/* post-details.css */
+
+/* 전체 게시글 상세보기 스타일 */
+.post-details {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+/* 제목 스타일 */
+.post-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #fca9cc;
+    padding-bottom: 0.5rem;
+}
+
+/* 내용 스타일 */
+.post-content {
+    font-size: 1.2rem; /* 제목보다는 작지만 정보보다 큼 */
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* 게시글 정보 스타일 */
+.post-info {
+    font-size: 1rem; /* 생성일, 수정일, 삭제일보다 작음 */
+    margin-bottom: 1.5rem;
+}
+
+/* 버튼 그룹 스타일 */
+.post-actions, .back-to-list {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* 버튼 스타일 */
+.post-actions .btn, .back-to-list .btn {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    margin: 0.5rem;
+    color: #fff;
+    background: #f888b7;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* 버튼 호버 상태 */
+.post-actions .btn:hover, .back-to-list .btn:hover {
+    background: #e85291;
+}
+
+/* 리스트로 돌아가기 버튼 위치 스타일 */
+.back-to-list {
+    margin-top: 1.5rem;
+}

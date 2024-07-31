@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 목록</title>
+    <link rel="stylesheet" href="/css/post_list.css">
+</head>
+<body>
+<header>
+    <h1>게시글 목록</h1>
+</header>
+<main class="post">
+    <section>
+        <!-- 게시글이 있을 때 -->
+        <table class="tb tb_col" th:if="${not #lists.isEmpty(posts)}">
+            <colgroup>
+                <col style="width:50px;"/>
+                <col style="width:auto;"/>
+                <col style="width:15%;"/>
+                <col style="width:15%;"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">등록일</th>
+                <th scope="col">수정</th>
+                <th scope="col">삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post, status : ${posts}">
+                <td th:text="${status.index + 1}">번호</td>
+                <td class="tl"><a th:href="@{/post/{id}(id=${post.id})}" th:text="${post.title}">제목</a></td>
+                <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">등록일</td>
+                <td><a th:href="@{/post/{id}/edit(id=${post.id})}" class="btn_edit">수정</a></td>
+                <!-- data-id에 post.id를 삽입 -->
+                <td><button class="btn_delete" th:attr="data-id=${post.id}">삭제</button></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 게시글이 없을 때 -->
+        <div class="no_data_msg" th:unless="${not #lists.isEmpty(posts)}">
+            게시글이 없습니다.
+        </div>
+
+        <!-- 글쓰기 버튼 -->
+        <p class="btn_set">
+            <a th:href="@{/post}" class="btns btn_st3 btn_mid">글쓰기</a>
+        </p>
+    </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // JavaScript로 삭제 처리
+    $(document).ready(function() {
+        $('.btn_delete').click(function(e) {
+            e.preventDefault(); // 기본 동작을 막음
+            const postId = $(this).data('id');
+
+            console.log('Post ID:', postId); // postId 값 확인
+
+            // 숫자로 변환
+            const postIdNumber = Number(postId);
+
+            if (isNaN(postIdNumber)) {
+                alert('잘못된 게시글 ID입니다.');
+                return;
+            }
+
+            if (confirm('정말로 삭제하시겠습니까?')) {
+                fetch(`/post/${postIdNumber}/delete`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(result => {
+                        alert('게시글이 삭제되었습니다.');
+                        location.reload(); // 페이지 새로고침
+                    })
+                    .catch(error => {
+                        alert('게시글 삭제에 실패하였습니다.');
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+            }
+        });
+    });
+</script>
+</body>
+</html>
