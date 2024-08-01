@@ -13,7 +13,6 @@ public class PostReadDto {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
-    private LocalDateTime deleteAt;
 
     public PostReadDto(Post post) {
         this.id = post.getId();
@@ -21,6 +20,5 @@ public class PostReadDto {
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.updateAt = post.getUpdateAt();
-        this.deleteAt = post.getDeleteAt();
     }
 }
